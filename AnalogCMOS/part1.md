@@ -28,7 +28,7 @@ $$g_{mb}=\dfrac{\partial I_D}{\partial V_{BS}}=g_m\dfrac{\gamma}{2\sqrt{2\Phi_F+
 
 - 沟道长度调制效应
 $$I_D=\dfrac{1}2\mu_nC_{ox}\dfrac{W}L(V_{GS}-V_{TH})^2(1+\lambda V_{DS})$$
-$$r_o=\dfrac1\lambda$$
+$$r_O=\dfrac1{\lambda I_D}$$
 
 - 亚阈值导电效应
 $$I_D=I_0\mathrm{exp}\dfrac{V_{GS}}{\zeta V_{T}},\,\,V_T=\dfrac{kT}q$$
@@ -45,11 +45,12 @@ $$I_D=I_0\mathrm{exp}\dfrac{V_{GS}}{\zeta V_{T}},\,\,V_T=\dfrac{kT}q$$
 #### 共源级
 ##### 采用电阻负载的共源级电路
 - $A_\upsilon=-g_mR_D$
-- 考虑沟道长度调制效应：$A_\upsilon=-g_m\dfrac{r_oR_D}{r_o+R_D}$
+- 考虑沟道长度调制效应：$A_\upsilon=-g_m\dfrac{r_OR_D}{r_O+R_D}$
 - 摆幅：$V_{in}-V_{TH1} < V_{out} < V_{DD}$
 
 ##### 采用二极管连接型器件作负载的共源级电路
 - $A_\upsilon=-g_{m1}\dfrac1{g_{m2}+g_{mb2}}=-\dfrac{g_{m1}}{g_{m2}}\dfrac1{1+\eta}=-\sqrt{\dfrac{\mu(W/L)_1}{\mu(W/L)_2}}\dfrac1{1+\eta}\quad (\eta=\dfrac{g_{mb2}}{g_{m2}})$
+
 - 考虑沟道长度调制效应：$A_\upsilon=-g_{m1}(\dfrac1{g_{m2}}||r_{o1}||r_{o2})$
 
 ##### 采用电流源作负载的共源级
@@ -61,18 +62,37 @@ $$I_D=I_0\mathrm{exp}\dfrac{V_{GS}}{\zeta V_{T}},\,\,V_T=\dfrac{kT}q$$
 
 ##### 带源极负反馈的共源级
 - $G_m=\dfrac{g_m}{1+g_mR_S}$
+
 - $A_\upsilon=-G_mR_D$
-- 考虑沟道长度调制效应和体校应：$G_m=\dfrac{g_mr_o}{R_S+r_o+(g_m+g_{mb})R_Sr_o}$
-- 输出阻抗：$R_{out}=r_o+(g_m+g_{mb})R_Sr_o+R_S$
+- 考虑沟道长度调制效应和体校应：$G_m=\dfrac{g_mr_O}{R_S+r_O+(g_m+g_{mb})R_Sr_O}$
+- 输出阻抗：$R_{out}=r_O+(g_m+g_{mb})R_Sr_O+R_S$
 
 #### 源跟随器（共漏级）
+- $A_\upsilon=\dfrac{g_mR_S}{1+(g_m+g_{mb})R_S}$
 
+- 输出阻抗：$R_{out}=\dfrac1{g_m+g_{mb}}$
 
 #### 共栅级
 ##### 采用电阻负载的共栅级
 - $A_\upsilon=g_m(1+\eta)R_D$
-- 输入阻抗：$R_{in}=\dfrac1{\dfrac1{r_o}+g_m+g_{mb}}$
+- 输入阻抗：$R_{in}=\dfrac1{\dfrac1{r_O}+g_m+g_{mb}}$
 - 考虑输出阻抗和信号源阻抗的情况：
-$$A_\upsilon=\dfrac{(g_m+g_mb)r_o+1}{r_o+(g_m+g_{mb})r_oR_S+R_S+R_D}R_D$$
+$$A_\upsilon=\dfrac{(g_m+g_mb)r_O+1}{r_O+(g_m+g_{mb})r_OR_S+R_S+R_D}R_D$$
+
 ### 差动放大器
 #### 基本差动对
+- $|A_{\upsilon ,DM}|=\sqrt{\mu_nC_{ox}\dfrac{W}{L}I_{SS}}R_D$
+
+- $A_{\upsilon ,CM}=-\dfrac{R_D/2}{1/(2g_m)+R_{SS}}$
+
+#### MOS为负载的差动对
+- $A_{\upsilon,DM}=-g_{mN}(r_{ON}||r_{OP})$
+
+### 电流镜
+#### 基本电流镜误差的产生
+- 事实上，VDS1通常是不变的，而VDS2与Iout连接的节点电压有关，一般而言，这个节点的电压是随输入信号变化而变化的，0时， Iout不可能是IREF的“精确”复制。
+
+#### 基本共源共栅电流镜
+- 
+
+#### 低压共源共栅电流镜
