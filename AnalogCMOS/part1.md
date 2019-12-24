@@ -24,6 +24,7 @@
 #### 二级效应
 - 体校应/背栅效应
 $$V_{TH}=V_{TH0}=\gamma(\sqrt{|2\Phi_F+V_{SB}|}-\sqrt{|2\Phi_F|})$$
+$$g_{mb}=\dfrac{\partial I_D}{\partial V_{BS}}=g_m\dfrac{\gamma}{2\sqrt{2\Phi_F+V_{SB}}}\quad \eta=\dfrac{g_{mb}}{g_m}$$
 
 - 沟道长度调制效应
 $$I_D=\dfrac{1}2\mu_nC_{ox}\dfrac{W}L(V_{GS}-V_{TH})^2(1+\lambda V_{DS})$$
@@ -45,9 +46,33 @@ $$I_D=I_0\mathrm{exp}\dfrac{V_{GS}}{\zeta V_{T}},\,\,V_T=\dfrac{kT}q$$
 ##### 采用电阻负载的共源级电路
 - $A_\upsilon=-g_mR_D$
 - 考虑沟道长度调制效应：$A_\upsilon=-g_m\dfrac{r_oR_D}{r_o+R_D}$
+- 摆幅：$V_{in}-V_{TH1} < V_{out} < V_{DD}$
 
 ##### 采用二极管连接型器件作负载的共源级电路
-- 
+- $A_\upsilon=-g_{m1}\dfrac1{g_{m2}+g_{mb2}}=-\dfrac{g_{m1}}{g_{m2}}\dfrac1{1+\eta}=-\sqrt{\dfrac{\mu(W/L)_1}{\mu(W/L)_2}}\dfrac1{1+\eta}\quad (\eta=\dfrac{g_{mb2}}{g_{m2}})$
+- 考虑沟道长度调制效应：$A_\upsilon=-g_{m1}(\dfrac1{g_{m2}}||r_{o1}||r_{o2})$
 
+##### 采用电流源作负载的共源级
+- $A_\upsilon=-g_{m1}(r_{o1}||r_{o2})$
+- 摆幅：$V_{in}-V_{TH1} < V_{out} < V_{DD}-|V_{GS2}=V_{TH2}|$
+
+##### 有源负载共源级(反向器MOS管实现)
+- $A_\upsilon=-(g_{m1}+g_{m2})(r_{o1}||r_{o2})$
+
+##### 带源极负反馈的共源级
+- $G_m=\dfrac{g_m}{1+g_mR_S}$
+- $A_\upsilon=-G_mR_D$
+- 考虑沟道长度调制效应和体校应：$G_m=\dfrac{g_mr_o}{R_S+r_o+(g_m+g_{mb})R_Sr_o}$
+- 输出阻抗：$R_{out}=r_o+(g_m+g_{mb})R_Sr_o+R_S$
+
+#### 源跟随器（共漏级）
+
+
+#### 共栅级
+##### 采用电阻负载的共栅级
+- $A_\upsilon=g_m(1+\eta)R_D$
+- 输入阻抗：$R_{in}=\dfrac1{\dfrac1{r_o}+g_m+g_{mb}}$
+- 考虑输出阻抗和信号源阻抗的情况：
+$$A_\upsilon=\dfrac{(g_m+g_mb)r_o+1}{r_o+(g_m+g_{mb})r_oR_S+R_S+R_D}R_D$$
 ### 差动放大器
 #### 基本差动对
