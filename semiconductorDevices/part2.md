@@ -48,6 +48,7 @@ $$
 $$
 
 #### 耗尽区宽度
+- 突变结
 $$
 |E(0)|=|E_{max}|=\dfrac{q}{\epsilon_s}N_Dx_x=\dfrac{q}{\epsilon_s}N_Ax_p
 $$
@@ -66,6 +67,8 @@ $$
 $$
 约化浓度:N_0=\dfrac{N_AN_D}{N_A+N_D}
 $$
+- 缓变结
+$$x_d=\sqrt[3]{\dfrac{12\epsilon_s(V_{bi}-V)}{aq}}$$
 
 #### 内建电势
 $$
@@ -197,4 +200,58 @@ $
 \qquad I_d=AJ_0,\quad A为PN结的结面积.
 $
 
-####
+#### PN结的击穿
+##### 雪崩击穿
+- 碰撞电离率：$\alpha_{i(n/p)}=AE\mathrm{exp}[-(\dfrac BE)^m]\quad A、E、m$为经验常数
+- 雪崩倍增因子：$M=\dfrac1{1-\int_0^{x_d}\alpha_i\mathrm{d}x}$
+- 雪崩击穿条件：$\int_0^{x_d}\alpha_i\mathrm{d}x\rightarrow1$
+- 雪崩击穿电压：
+  - 突变结：$V_B=\dfrac{\epsilon_s}{2qN_0}E^2_c=5.2\times10^{13}E_G^{\frac32}N_0^{-\frac34}$
+  - 线性缓变结：$V_B=\sqrt{\dfrac{32\epsilon_s}{9aq}}E_c^{\frac32}=10^{10}E_G^{\frac65}a^{\frac25}$
+#### 齐纳击穿(隧道击穿)
+- 齐纳击穿条件：$d=\dfrac{E_G}{q|E_{max}|}$足够小
+#### 热击穿
+
+#### 势垒电容
+- 单位结电容：$\dfrac{C_T}{A}=\dfrac{\epsilon_s}{x_d}$
+- 突变结电容：$C_T=A\sqrt{\dfrac{\epsilon_s qN_0}{2(V_{bi}-V)}}$
+- 线性缓变结电容：$C_T=A\sqrt[3]{\dfrac{aq\epsilon_s}{12(V_{bi}-V)}}$
+
+
+# MOSFET
+### 阈值电压
+- 阈值电压的一般表达式
+$$
+V_T=\Phi_{MS}-\dfrac{Q_{OX}}{C_{OX}}+K(2\Phi_{FP})^{\frac12}+2\Phi_{FP}
+$$
+
+- 影响阈值电压的因素
+1. 栅氧化层厚度$T_{OX}$
+2. 衬底费米势$\Phi_{FB}$
+3. 功函数差$\Phi_{MS}$
+4. 耗尽区高电离杂质电荷面密度$Q_{AD}$
+5. 栅氧化层中的电荷面密度$Q_{OX}$
+
+- 离子注入后的阈值电压
+$$V'_T=\Phi_{MS}-\dfrac{Q_{OX}}{C_{OX}}-\frac{Q_T}{C_{OX}}-\frac{Q_A}{C_{OX}}(1-\dfrac{qN_IR^2}{4\epsilon_s\Phi_{FP}})^{\frac12}+2\Phi_{FP}$$
+$$\Delta V_T=-\frac{Q_I}{C_{OX}}-\frac{Q_A}{C_{OX}}[(1-\dfrac{qN_IR^2}{4\epsilon_s\Phi_{FP}})^{\frac12}-1]$$
+$$N_I=\Delta N\quad Q_I=-qN_IR$$
+
+### MOSFET直流电亚方程
+##### 非饱和区
+1. 沟道电流只由漂移电流构成，忽略扩散电流
+2. 采用缓变沟道近似
+3. 沟道内的载流子(电子)迁移率为常数
+4. 采用强反型近似，即认为当表面少子浓度达到体内平衡多子浓度($\Phi_S=\Phi_{s,inv}$)时沟道开始导电
+5. $Q_{OX}为常数$
+- 漏级电流一般表达式
+$$I_D=-Z\mu_nQ_n\frac{\mathrm{d}V}{\mathrm{d}y} \quad Q_n=\int_0^bqn\mathrm{d}x \\
+I_D=\frac ZL\mu_n\int^{V_D}_{V_S}(-Q_n)\mathrm{d}V$$
+- 沟道电子电荷面密度$Q_b$
+$$V_G>V_T\qquad Q_n=-C_{OX}(V_G-V_B-V_{FB}-\Phi{S,inv})-Q_A$$
+$$V_D>V_S\qquad \Phi_{S,inv}(y)=2\Phi_{FP}-V_B+V(y) \\
+x_d(y)=\sqrt{\frac{2\epsilon_s}{qN_A}[2\Phi_{FP}-V_B+V(y)]} \\
+Q_A(y)=-qN_Ax_d$$
+- 漏级电流精确表达式
+$$I_D=\frac ZL\mu_nC_{OX}[(V_{GS}-V_T)V_{DS}-\frac12V_{DS}^2]$$
+
