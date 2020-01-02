@@ -6,15 +6,15 @@
 #### 连续信号
 - 时域：$x(t)$
 - 频域：$X(\mathbf{j}\omega)$
-$$f(t)=\frac{1}{2\pi}\int F(\omega)e^{\mathbf{j}\omega t}d\omega$$
+$$f(t)=\frac{1}{2\pi}\int F(\omega)e^{\mathbf{j}\omega t}\mathrm{d}\omega$$
 - 复频域：$X(s)$
-$$f(t)=\frac{1}{2\pi}\int F(s)e^{\mathbf{j}st}ds$$
+$$f(t)=\frac{1}{2\pi}\int F(s)e^{\mathbf{j}st}\mathrm{d}s$$
 #### 离散信号
 - 时域：$x(n)$
 - 频域：$x(e^{\mathbf{j}\omega})$
-$$$$
+$$f[k]=\frac1{2\pi}\int F(e^{\mathbf{j}\Omega})e^{\mathbf{j}\Omega k}\mathrm{d}\Omega$$
 - Z域：$X(z)$
-$$x(n)=\frac{1}{2\pi}\int x(z)$$
+$$x(n)=\frac{1}{2\pi}\int x(z)\mathrm{d}z$$
 ---
 
 ### 系统
@@ -32,9 +32,64 @@ $$x(n)=\frac{1}{2\pi}\int x(z)$$
 ### 信号与系统分析导论
 ---
 #### 信号的描述
+- 在数学上信号可以表示为一个或多个变量的函数
 #### 信号的自变量变换
 #### 基本信号
+##### 普通信号
+- 指数信号：$f(t)=Ae^{at},\quad t\in \mathbf{R}$
+- 虚指数信号与正弦信号：
+  - 虚指数信号：$f(t)=e^{j\omega_0t},\quad t\in\mathbf{R},\quad T_0=\dfrac{2\pi}{\omega_0}$
+  - 正弦信号：$f(t)=A\mathrm{sin}(\omega_0t+\varphi),\quad t\in\mathbf{R},\quad T_0=\dfrac{2\pi}{\omega_0}$
+  - 欧拉（Euler）公式：
+  $$
+    e^{j\omega_0t}=\mathrm{cos}(\omega_0t)+j\mathrm{sin}(\omega_0t)
+  $$
+  $$
+    \mathrm{cos}(\omega_0t)=\dfrac12(e^{j\omega_0t}+e^{-j\omega_0t})
+  $$
+  $$
+    \mathrm{sin}(\omega_0t)=\dfrac12(e^{j\omega_0t}-e^{-j\omega_0t})
+  $$
+- 复指数信号：
+$$f(t)=Ae^{st},\quad t\in\mathbf{R}$$
+$$Ae^{st}=Ae^{(\sigma+j\omega_0)t}=Ae^{\sigma t}\mathrm{cos}(\omega_0t)+jAe^{\sigma t}\mathrm{sin}(\omega_0t)$$
+- 抽样函数：$\mathrm{Sa}(t)=\dfrac{\mathrm{sin}t}{t},\quad t\in\mathbf{R}$
+##### 奇异信号
+- 单位阶跃信号：$u(t)=\left\{
+\begin{array}{rl}
+1 & t>0 \\
+0 & t<0
+\end{array} \right .\quad t\in\mathbf{R}$
+
+- 单位冲激信号：$\left\{
+\begin{array}{l}
+\int^\infin_{-\infin}\delta(t-t_0)\mathrm{d}t=1 \\
+\delta(t-t_0)=0\quad  t\not= t_0
+\end{array} \right .$
+
+  - 单位冲激信号的性质：
+  1. 筛选特性：$f(t)\delta(t-t_0)=f(t_0)\delta(t-t_0)$
+
+  2. 取样特性：$\int^\infin_{-\infin}f(t)\delta(t-t_0)\mathrm{d}t=f(t_0)$
+  3. 展缩特性：$\delta(at)=\dfrac1{|a|}\delta(t)$
+  4. 卷积特性：$f(t)*\delta(t)=f(t-t_0)$
+  5. 冲激信号与阶跃信号的关系：$\dfrac{\mathrm{d}u(t)}{\mathrm{d}t}=\delta(t)$
+- 斜坡信号：$r(t)=\left\{
+\begin{array}{l}
+t & t\geq0 \\
+0 & t<0
+\end{array} \right .$
+  - 斜坡信号与阶跃信号的关系：
+  $$r(t)=\int^t_{-\infin}u(\tau)\mathrm{d}\tau$$
+  $$\frac{\mathrm{d}r(t)}{\mathrm{d}t}=u(t)$$
+- 冲激偶信号：$\delta'(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}$
+  - 冲激偶信号的特性：
+  1. 筛选特性：$f(t)\delta'(t-t_0)=-f'(t_0)\delta(t-t_0)+f(t_0)\delta'(t-t_0)$
+  2. 展缩特性：$\delta'(at)=\dfrac1{a|a|}\delta'(t),\quad (a\not=0)$
+  3. 卷积特性：$f(t)*\delta'(t)=f'(t)$
 #### 系统及其数学模型
+- 数学表达式
+- 方框图
 #### 系统的性质
 - 线性：同时满足均匀性与叠加性
 - 时不变性：系统输出与时间无关
