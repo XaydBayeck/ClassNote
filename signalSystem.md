@@ -85,6 +85,7 @@ t & t\geq0 \\
 - 冲激偶信号：$\delta'(t)=\dfrac{\mathrm{d}\delta(t)}{\mathrm{d}t}$
   - 冲激偶信号的特性：
   1. 筛选特性：$f(t)\delta'(t-t_0)=-f'(t_0)\delta(t-t_0)+f(t_0)\delta'(t-t_0)$
+
   2. 展缩特性：$\delta'(at)=\dfrac1{a|a|}\delta'(t),\quad (a\not=0)$
   3. 卷积特性：$f(t)*\delta'(t)=f'(t)$
 #### 系统及其数学模型
@@ -92,7 +93,16 @@ t & t\geq0 \\
 - 方框图
 #### 系统的性质
 - 线性：同时满足均匀性与叠加性
+
+> 若
+> $$y_1(t)=T\{f_1(t)\},\quad y_2(t)=T\{f_2(t)\}$$
+> 则
+> $$T\{\alpha f_1(t)+\beta f_2(t)\}=\alpha y_1(t)+\beta y_2(t)$$
 - 时不变性：系统输出与时间无关
+> 若
+> $$y_f(t)=T\{f(t)\}$$
+> 则
+> $$T\{f(t-t_0)\}=y_f(t-t_0)$$
 - 因果性
 - 稳定性：输入有界，输出也有界
 - 可逆性
@@ -101,11 +111,21 @@ t & t\geq0 \\
 - 功率信号
 - 信号总能量与平均功率都是$\infin$
 #### 信号分解
-$$x(t)=x_e(t)+x_0(t)$$
+- 信号分解为直流量和交流量：$f(t)=f_{DC}(t)+f_{AC}(t)$
+$$f_{DC}(t)=\dfrac1{a-b}\int^b_af(t)\mathrm{d}t$$
+$$f_{DC}[k]=\dfrac1{N_2-N_1+1}\sum^{N_2}_{k=N_1}f[k]$$
+- 信号分解为奇分量和偶分量：$f(t)=f_e(t)+f_0(t)$
+$$f_e(t)=\dfrac12[f(t)+f(-t)]$$
+$$f_o(t)=\dfrac12[f(t)-f(-t)]$$
+- 信号分解为实分量与虚分量：$f(t)=f_r(t)+\mathrm{j}f_i(t)$
+$$f_r(t)=\dfrac12[f(t)+f^*(t)]$$
+$$f_i(t)=\dfrac12[f(t)-f^*(t)]$$
 ---
 ### 信号与系统的时域分析
 ---
 #### LTI系统的时域分析---卷积积分和卷积和
+- 卷积的定义
+$$y(t)=f(t)*h(t)=\int^\infin_{-\infin}f(\tau)h(t-\tau)\mathrm{d}\tau$$
 #### LTI系统的微分方程和差分方程表示
 #### LTI系统的框图表示
 #### 奇异函数
@@ -136,6 +156,41 @@ $$X_p(\mathbf{j}\omega)=\frac1{2\pi}X(\mathbf{j}\omega)*\frac{2\pi}T\sum\delta(\
 #### 信号的幅度调制与解调
 ---
 ### 拉普拉斯变换
+- 常用单边拉普拉斯变换
+
+|单边信号$f(t)$|Laplace变换$F(s)$|收敛域|
+|:-:|:-:|:-:|
+|$e^{-\lambda t}u(t)$|$\dfrac1{s+\lambda}$|$\mathrm{Re}(s)>-\lambda$|
+|$e^{\mathrm{j}\omega_0t}u(t)$|$\dfrac1{s-\mathrm{j}\omega_0}$|$\mathrm{Re}(s)>0$|
+|$\cos(\omega_0t)u(t)$|$\dfrac s{s^2+\omega_0^2}$|$\mathrm{Re}(s)>0$|
+|$\sin(\omega_0t)u(t)$|$\dfrac{\omega_0}{s^2+\omega_0^2}$|$\mathrm{Re}(s)>0$|
+|$e^{-\sigma_0t}\cos(\omega_0t)u(t)$|$\dfrac{s+\sigma_0}{(s+\sigma_0)^2+\omega_0^2}$|$\mathrm{Re}(s)>-\sigma_0$|
+|$e^{-\sigma_0t}\sin(\omega_0t)u(t)$|$\dfrac{\omega_0}{(s+\sigma_0)^2+\omega_0^2}$|$\mathrm{Re}(s)>-\sigma_0$|
+|$\delta(t)$|$1$|$\mathrm{Re}(s)>-\infin$|
+|$\delta^{(n)}(t)$|$s^n(n=1,2,\cdots)$|$\mathrm{Re}(s)>-\infin$|
+|$u(t)$|$\dfrac1s$|$\mathrm{Re}(s)>0$|
+|$tu(t)$|$\dfrac1{s^2}$|$\mathrm{Re}(s)>0$|
+|$t^nu(t)$|$\dfrac{n!}{s^{n+1}}$|$\mathrm{Re}(s)>0$|
+|$te^{-\lambda t}u(t)$|$\dfrac1{(s+\lambda)^2}$|$\mathrm{Re}(s)>-\lambda$|
+
+- 单边拉普拉斯变换的性质
+
+|性质|时域|复频域(s域)|收敛域|
+|:-:|:-:|:-:|:-:|
+|线性特性|$a_1f_1(t)+a_2f_2(t)$|$a_1F_1(s)+a_2F_2(s)$|$\mathrm{Re}(s)>\max(\sigma_1,\sigma_2)$|
+|特性|$f(at),a>0$|$\dfrac1aF(\dfrac sa)$|$\mathrm{Re}(s)>a\sigma_0$|
+|特性|$f(t-t_0)u(t-t_0),t_0\geq 0$|$e^{-st_0}F(s)$|$\mathrm{Re}(s)>\sigma_0$|
+|特性|$f_1(t)*f_2(t)$|$F_1(s)F_2(s)$|$\mathrm{Re}(s)>\max(\sigma_1,\sigma_2)$|
+|特性|$f_1(t)f_2(t)$|$\dfrac1{2\pi\mathrm{j}}F_1(s)*F_2(s)$|$\mathrm{Re}(s)>\sigma_1+\sigma_2$|
+|特性|$e^{-\lambda t}f(t)$|$F(s+\lambda)$|$\mathrm{Re}(s)>\sigma_0-\lambda$|
+|特性|$-tf(t)$|$\dfrac{\mathrm{d}F(s)}{\mathrm{d}s}$|$\mathrm{Re}(s)>\sigma_0$|
+|特性|$\dfrac{\mathrm{d}f(t)}{\mathrm{d}t}$|$sF(s)-f(0^-)$|$\mathrm{Re}(s)>\sigma_0$|
+|特性|$\dfrac{\mathrm{d}^2f(t)}{\mathrm{d}^2t}$|$s^2F(s)-sf(0^-)-f'(0^-)$|$\mathrm{Re}(s)>\sigma_0$|
+|特性|$\int^t_{0^-}f(\tau)\mathrm{d}\tau$|$\dfrac{F(s)}{s}$|$\mathrm{Re}(s)>\sigma_0$|
+|特性|$\int^t_{-\infin}f(\tau)\mathrm{d}\tau$|$\dfrac{f^{(-1)}(0^-)}{s}+\dfrac{F(s)}{s}$|$\mathrm{Re}(s)>\sigma_0$|
+|特性|$f(0^+)$|$\lim\limits_{s\to\infin}sF(s)$|$\mathrm{Re}(s)>\max(\sigma_0,0)$|
+|特性|$f(\infin)$|$\lim\limits_{s\to 0}sF(s)$|$\mathrm{Re}(s)>\max(\sigma_0,0)$|
+
 ---
 ### Z变换
 ---
